@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //admin
-Route::name('admin.')->prefix('admin/')->middleware('web')->group(function(){
+Route::name('admin.')->prefix('admin/')->middleware('auth')->group(function(){
     Route::get('dashboard',function(){
         return view('admin.pages.dashboard');
     });
