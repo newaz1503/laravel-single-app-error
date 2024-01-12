@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\front\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class,'index'])->name('front');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //admin
-Route::name('admin.')->prefix('admin/')->middleware('web')->group(function(){
+Route::name('admin.')->prefix('admin/')->middleware('auth')->group(function(){
     Route::get('dashboard',function(){
         return view('admin.pages.dashboard');
     });
